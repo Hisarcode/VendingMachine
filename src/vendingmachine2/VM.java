@@ -45,6 +45,16 @@ public class VM extends javax.swing.JFrame {
         label1 = new java.awt.Label();
         lbl_money = new java.awt.Label();
         icon_sprite = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        icon_sprite1 = new javax.swing.JLabel();
+        icon_sprite2 = new javax.swing.JLabel();
+        icon_sprite3 = new javax.swing.JLabel();
+        icon_sprite4 = new javax.swing.JLabel();
+        icon_sprite5 = new javax.swing.JLabel();
+        icon_sprite6 = new javax.swing.JLabel();
+        icon_sprite7 = new javax.swing.JLabel();
+        icon_sprite8 = new javax.swing.JLabel();
+        icon_sprite9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,31 +65,31 @@ public class VM extends javax.swing.JFrame {
                 btn_spriteActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_sprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 80, -1));
+        getContentPane().add(btn_sprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 90, -1));
 
         btn_coca.setText("Coca Cola");
-        getContentPane().add(btn_coca, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 164, -1, -1));
+        getContentPane().add(btn_coca, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 90, -1));
 
         btn_fanta.setText("Fanta");
-        getContentPane().add(btn_fanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+        getContentPane().add(btn_fanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, 90, -1));
 
-        jButton4.setText("jButton4");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, -1, -1));
+        jButton4.setText("Aquarius");
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 90, -1));
 
         btn_tebs.setText("Tebs");
-        getContentPane().add(btn_tebs, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, -1, -1));
+        getContentPane().add(btn_tebs, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 90, -1));
 
-        jButton6.setText("jButton6");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
+        jButton6.setText("AW");
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 90, -1));
 
         btn_minute.setText("Minute Maid");
-        getContentPane().add(btn_minute, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 223, -1, -1));
+        getContentPane().add(btn_minute, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
-        jButton8.setText("jButton8");
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
+        jButton8.setText("Ciel");
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 90, -1));
 
-        jButton9.setText("jButton9");
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
+        jButton9.setText("Burn");
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 90, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -143,9 +153,39 @@ public class VM extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 220, -1));
 
         icon_sprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 80, -1));
+        getContentPane().add(icon_sprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 90, -1));
 
-        setSize(new java.awt.Dimension(690, 433));
+        jButton1.setText("Friesca");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 90, -1));
+
+        icon_sprite1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_sprite1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 90, -1));
+
+        icon_sprite2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_sprite2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 90, -1));
+
+        icon_sprite3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_sprite3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 90, -1));
+
+        icon_sprite4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_sprite4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 90, -1));
+
+        icon_sprite5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_sprite5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 90, -1));
+
+        icon_sprite6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_sprite6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 90, -1));
+
+        icon_sprite7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_sprite7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 90, -1));
+
+        icon_sprite8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_sprite8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 90, -1));
+
+        icon_sprite9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_sprite9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 90, -1));
+
+        setSize(new java.awt.Dimension(690, 598));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -212,6 +252,16 @@ public class VM extends javax.swing.JFrame {
     private javax.swing.JButton btn_sprite;
     private javax.swing.JButton btn_tebs;
     private javax.swing.JLabel icon_sprite;
+    private javax.swing.JLabel icon_sprite1;
+    private javax.swing.JLabel icon_sprite2;
+    private javax.swing.JLabel icon_sprite3;
+    private javax.swing.JLabel icon_sprite4;
+    private javax.swing.JLabel icon_sprite5;
+    private javax.swing.JLabel icon_sprite6;
+    private javax.swing.JLabel icon_sprite7;
+    private javax.swing.JLabel icon_sprite8;
+    private javax.swing.JLabel icon_sprite9;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
