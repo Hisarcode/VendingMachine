@@ -1,6 +1,11 @@
 package vendingmachine;
 
+import java.awt.Color;
+import galtox.Time.TimeScan;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,10 +21,62 @@ public class VM extends javax.swing.JFrame {
     /**
      * Creates new form VM
      */
-    public VM() {
-        initComponents();
+    
+    private Timer timer;
+    private int seconds = 0, minutes = 5, hours = 0;
+    private int interval = 1000;
+    
+    public void start() {
+        timer.start();
+       
     }
 
+    public void stop() {
+        timer.stop();
+       
+    }
+    
+    public VM() {
+        initComponents();
+        initMulai();
+        start();
+    }
+
+    private void initMulai() {
+        timer = new Timer(interval, new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if (seconds == 0 && (minutes > 0 || hours > 0)) {
+                    seconds = 59;
+                    minutes--;
+                } else {
+                    seconds--;
+                }
+                if (minutes == 0 && hours > 0) {
+                    minutes = 59;
+                    hours--;
+                }
+                if (seconds == 0 && minutes == 0 && hours == 0) {
+                    stop();
+                    seconds = minutes = hours = 0;
+                    txtRemaining.setText("Selesai !");
+                }
+                TimeScan ts = new TimeScan(seconds, minutes, hours);
+                if (minutes >= 0 && hours > 0 && seconds >= 0) {
+                    txtRemaining.setText(ts.getHours() + ":" + ts.getMinutes() + ":" + ts.getSeconds());
+                } else if (minutes > 0 && seconds >= 0 && hours <= 0) {
+                    txtRemaining.setText(ts.getMinutes() + ":" + ts.getSeconds());
+                } else if (minutes == 0 && hours == 0 && seconds > 0) {
+                    if (seconds > 10) {
+                        txtRemaining.setText(ts.getSeconds());
+                    } else {
+                        txtRemaining.setText(String.valueOf(seconds));
+                        txtRemaining.setForeground(Color.red);
+                    }
+                }
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +101,7 @@ public class VM extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         moneyTF = new javax.swing.JTextField();
         changeTF = new javax.swing.JTextField();
+        txtRemaining = new galtox.Palette.TextBerto();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vending Machine 1.0");
@@ -168,6 +226,22 @@ public class VM extends javax.swing.JFrame {
 
         changeTF.setEditable(false);
         getContentPane().add(changeTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 100, -1));
+
+        txtRemaining.setEditable(false);
+        txtRemaining.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        txtRemaining.setForeground(new java.awt.Color(102, 255, 51));
+        txtRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtRemaining.setText("00:00:00");
+        txtRemaining.setDisabledTextColor(new java.awt.Color(51, 255, 0));
+        txtRemaining.setFocusable(false);
+        txtRemaining.setFont(new java.awt.Font("Tahoma", 0, 52)); // NOI18N
+        txtRemaining.setMargin(new java.awt.Insets(0, 2, 2, 2));
+        txtRemaining.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRemainingActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtRemaining, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 220, 50));
 
         setSize(new java.awt.Dimension(549, 403));
         setLocationRelativeTo(null);
@@ -294,6 +368,10 @@ public class VM extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_purchaseBtnActionPerformed
 
+    private void txtRemainingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRemainingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRemainingActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -344,6 +422,7 @@ public class VM extends javax.swing.JFrame {
     private javax.swing.JButton purchaseBtn;
     private javax.swing.JRadioButton rootbeerRB;
     private javax.swing.JRadioButton spriteRB;
+    private galtox.Palette.TextBerto txtRemaining;
     private javax.swing.JRadioButton waterRB;
     // End of variables declaration//GEN-END:variables
 }

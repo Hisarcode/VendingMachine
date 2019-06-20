@@ -5,14 +5,96 @@
  */
 package vendingmachine2;
 
+import galtox.Time.TimeScan;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
 /**
  *
- * @author Saragih
- * ukuran icon 40x60
- * 
+ * @author Saragih ukuran icon 40x60
+ *
  */
 public class VM extends javax.swing.JFrame {
 
+    private boolean moneyValidator() {
+        boolean moneyValid = false;
+
+        /*Salah IF
+        if (("50000".equals(txt_money.getText())) && (rbtn_biru.isSelected())) {
+            moneyValid = true;
+        } else if (("20000".equals(txt_money.getText())) && (rbtn_hijau.isSelected())) {
+            moneyValid = true;
+        } else if (("10000".equals(txt_money.getText())) && (rbtn_ungu.isSelected())) {
+            moneyValid = true;
+        } else if (("5000".equals(txt_money.getText())) && (rbtn_coklat.isSelected())) {
+            moneyValid = true;
+        }*/
+        if ((("50000".equals(txt_money.getText())) && (rbtn_biru.isSelected()))
+                || (("20000".equals(txt_money.getText())) && (rbtn_hijau.isSelected()))
+                || (("10000".equals(txt_money.getText())) && (rbtn_ungu.isSelected()))
+                || (("5000".equals(txt_money.getText())) && (rbtn_coklat.isSelected()))) {
+            moneyValid = true;
+        }
+
+        return moneyValid;
+    }
+
+    // Bagian Timer untuk batas VM menunggu penggunaan uang
+    private Timer timer;
+    private int seconds = 0, minutes = 5, hours = 0;
+    private int interval = 1000;
+
+    public void start() {
+        timer.start();
+
+    }
+
+    public void stop() {
+        timer.stop();
+
+    }
+
+    private void initMulai() {
+        timer = new Timer(interval, new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if (seconds == 0 && (minutes > 0 || hours > 0)) {
+                    seconds = 59;
+                    minutes--;
+                } else {
+                    seconds--;
+                }
+                if (minutes == 0 && hours > 0) {
+                    minutes = 59;
+                    hours--;
+                }
+                if (seconds == 0 && minutes == 0 && hours == 0) {
+                    stop();
+                    seconds = minutes = hours = 0;
+                    txtRemaining.setText("00:00");
+                    lbl_money.setText("0");
+                }
+                TimeScan ts = new TimeScan(seconds, minutes, hours);
+                if (minutes >= 0 && hours > 0 && seconds >= 0) {
+                    txtRemaining.setText(ts.getHours() + ":" + ts.getMinutes() + ":" + ts.getSeconds());
+                } else if (minutes > 0 && seconds >= 0 && hours <= 0) {
+                    txtRemaining.setText(ts.getMinutes() + ":" + ts.getSeconds());
+                } else if (minutes == 0 && hours == 0 && seconds > 0) {
+                    if (seconds > 10) {
+                        txtRemaining.setText(ts.getSeconds());
+                    } else {
+                        txtRemaining.setText(String.valueOf(seconds));
+                        txtRemaining.setForeground(Color.red);
+                    }
+                }
+            }
+        });
+    }
+
+    //akhir timer batas penunggu uang
     /**
      * Creates new form VM
      */
@@ -29,35 +111,114 @@ public class VM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblharga_aquarius = new javax.swing.JLabel();
+        lblharga_sprite = new javax.swing.JLabel();
+        lblharga_aw = new javax.swing.JLabel();
+        lblharga_coca = new javax.swing.JLabel();
+        lblharga_minute = new javax.swing.JLabel();
+        lblharga_ciel = new javax.swing.JLabel();
+        lblharga_tebs = new javax.swing.JLabel();
+        lblharga_burn = new javax.swing.JLabel();
+        lblharga_fanta = new javax.swing.JLabel();
+        lblharga_friesca = new javax.swing.JLabel();
         btn_sprite = new javax.swing.JButton();
+        btn_aquarius = new javax.swing.JButton();
         btn_coca = new javax.swing.JButton();
-        btn_fanta = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        btn_tebs = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btn_aw = new javax.swing.JButton();
         btn_minute = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btn_ciel = new javax.swing.JButton();
+        btn_tebs = new javax.swing.JButton();
+        btn_burn = new javax.swing.JButton();
+        btn_fanta = new javax.swing.JButton();
+        btn_friesca = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txt_money = new java.awt.TextField();
         btn_insertmoney = new java.awt.Button();
+        rbtn_coklat = new javax.swing.JRadioButton();
+        rbtn_ungu = new javax.swing.JRadioButton();
+        rbtn_biru = new javax.swing.JRadioButton();
+        rbtn_hijau = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
         lbl_money = new java.awt.Label();
+        txtRemaining = new javax.swing.JTextField();
         icon_sprite = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        icon_sprite1 = new javax.swing.JLabel();
-        icon_sprite2 = new javax.swing.JLabel();
-        icon_sprite3 = new javax.swing.JLabel();
-        icon_sprite4 = new javax.swing.JLabel();
-        icon_sprite5 = new javax.swing.JLabel();
-        icon_sprite6 = new javax.swing.JLabel();
-        icon_sprite7 = new javax.swing.JLabel();
-        icon_sprite8 = new javax.swing.JLabel();
-        icon_sprite9 = new javax.swing.JLabel();
+        icon_aquarius = new javax.swing.JLabel();
+        icon_coca = new javax.swing.JLabel();
+        icon_aw = new javax.swing.JLabel();
+        icon_minute = new javax.swing.JLabel();
+        icon_ciel = new javax.swing.JLabel();
+        icon_tebs = new javax.swing.JLabel();
+        icon_burn = new javax.swing.JLabel();
+        icon_fanta = new javax.swing.JLabel();
+        icon_friesca = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Vending Machine Beta Version");
+        setBackground(java.awt.SystemColor.activeCaption);
+        setForeground(new java.awt.Color(255, 51, 51));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblharga_aquarius.setBackground(new java.awt.Color(255, 255, 255));
+        lblharga_aquarius.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        lblharga_aquarius.setText("Rp 5.000");
+        lblharga_aquarius.setOpaque(true);
+        getContentPane().add(lblharga_aquarius, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 77, -1, -1));
+
+        lblharga_sprite.setBackground(new java.awt.Color(255, 255, 255));
+        lblharga_sprite.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        lblharga_sprite.setText("Rp 5.000");
+        lblharga_sprite.setOpaque(true);
+        getContentPane().add(lblharga_sprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 77, -1, -1));
+
+        lblharga_aw.setBackground(new java.awt.Color(255, 255, 255));
+        lblharga_aw.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        lblharga_aw.setText("Rp 5.000");
+        lblharga_aw.setOpaque(true);
+        getContentPane().add(lblharga_aw, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 175, -1, -1));
+
+        lblharga_coca.setBackground(new java.awt.Color(255, 255, 255));
+        lblharga_coca.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        lblharga_coca.setText("Rp 5.000");
+        lblharga_coca.setOpaque(true);
+        getContentPane().add(lblharga_coca, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 175, -1, -1));
+
+        lblharga_minute.setBackground(new java.awt.Color(255, 255, 255));
+        lblharga_minute.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        lblharga_minute.setText("Rp 5.000");
+        lblharga_minute.setOpaque(true);
+        getContentPane().add(lblharga_minute, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 275, -1, -1));
+
+        lblharga_ciel.setBackground(new java.awt.Color(255, 255, 255));
+        lblharga_ciel.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        lblharga_ciel.setText("Rp 5.000");
+        lblharga_ciel.setOpaque(true);
+        getContentPane().add(lblharga_ciel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 275, -1, -1));
+
+        lblharga_tebs.setBackground(new java.awt.Color(255, 255, 255));
+        lblharga_tebs.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        lblharga_tebs.setText("Rp 5.000");
+        lblharga_tebs.setOpaque(true);
+        getContentPane().add(lblharga_tebs, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 375, -1, -1));
+
+        lblharga_burn.setBackground(new java.awt.Color(255, 255, 255));
+        lblharga_burn.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        lblharga_burn.setText("Rp 5.000");
+        lblharga_burn.setOpaque(true);
+        getContentPane().add(lblharga_burn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 375, -1, -1));
+
+        lblharga_fanta.setBackground(new java.awt.Color(255, 255, 255));
+        lblharga_fanta.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        lblharga_fanta.setText("Rp 5.000");
+        lblharga_fanta.setOpaque(true);
+        getContentPane().add(lblharga_fanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 475, -1, -1));
+
+        lblharga_friesca.setBackground(new java.awt.Color(255, 255, 255));
+        lblharga_friesca.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        lblharga_friesca.setText("Rp 5.000");
+        lblharga_friesca.setOpaque(true);
+        getContentPane().add(lblharga_friesca, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 475, -1, -1));
 
         btn_sprite.setText("Sprite");
         btn_sprite.addActionListener(new java.awt.event.ActionListener() {
@@ -67,31 +228,36 @@ public class VM extends javax.swing.JFrame {
         });
         getContentPane().add(btn_sprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 90, -1));
 
+        btn_aquarius.setText("Aquarius");
+        getContentPane().add(btn_aquarius, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 90, -1));
+
         btn_coca.setText("Coca Cola");
         getContentPane().add(btn_coca, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 90, -1));
 
-        btn_fanta.setText("Fanta");
-        getContentPane().add(btn_fanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, 90, -1));
-
-        jButton4.setText("Aquarius");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 90, -1));
-
-        btn_tebs.setText("Tebs");
-        getContentPane().add(btn_tebs, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 90, -1));
-
-        jButton6.setText("AW");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 90, -1));
+        btn_aw.setText("AW");
+        getContentPane().add(btn_aw, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 90, -1));
 
         btn_minute.setText("Minute Maid");
         getContentPane().add(btn_minute, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
-        jButton8.setText("Ciel");
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 90, -1));
+        btn_ciel.setText("Ciel");
+        getContentPane().add(btn_ciel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 90, -1));
 
-        jButton9.setText("Burn");
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 90, -1));
+        btn_tebs.setText("Tebs");
+        getContentPane().add(btn_tebs, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 90, -1));
+
+        btn_burn.setText("Burn");
+        getContentPane().add(btn_burn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 90, -1));
+
+        btn_fanta.setText("Fanta");
+        getContentPane().add(btn_fanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, 90, -1));
+
+        btn_friesca.setText("Friesca");
+        getContentPane().add(btn_friesca, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 90, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(txt_money, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 27, 70, -1));
 
         btn_insertmoney.setLabel("insert money");
         btn_insertmoney.addActionListener(new java.awt.event.ActionListener() {
@@ -99,115 +265,177 @@ public class VM extends javax.swing.JFrame {
                 btn_insertmoneyActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_insertmoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 23, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(txt_money, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_insertmoney, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_insertmoney, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_money, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        rbtn_coklat.setText("Coklat");
+        rbtn_coklat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtn_coklatActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rbtn_coklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 220, 70));
+        rbtn_ungu.setText("Ungu");
+        rbtn_ungu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtn_unguActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rbtn_ungu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        rbtn_biru.setText("Biru");
+        rbtn_biru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtn_biruActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rbtn_biru, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+
+        rbtn_hijau.setText("Hijau");
+        rbtn_hijau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtn_hijauActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rbtn_hijau, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 220, 120));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setText("ON SALE");
+        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, -1, -1));
 
+        lbl_money.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 24)); // NOI18N
         lbl_money.setText("0");
+        jPanel2.add(lbl_money, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 190, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_money, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(136, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl_money, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        txtRemaining.setEditable(false);
+        txtRemaining.setBackground(new java.awt.Color(255, 255, 255));
+        txtRemaining.setFont(new java.awt.Font("Lucida Fax", 1, 11)); // NOI18N
+        txtRemaining.setForeground(new java.awt.Color(102, 60, 130));
+        txtRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtRemaining.setText("00:00");
+        jPanel2.add(txtRemaining, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 70, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 220, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 220, 100));
 
         icon_sprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 90, -1));
+        getContentPane().add(icon_sprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 90, -1));
 
-        jButton1.setText("Friesca");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 90, -1));
+        icon_aquarius.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_aquarius, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 90, -1));
 
-        icon_sprite1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 90, -1));
+        icon_coca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_coca, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 90, -1));
 
-        icon_sprite2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 90, -1));
+        icon_aw.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_aw, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 90, -1));
 
-        icon_sprite3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 90, -1));
+        icon_minute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_minute, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 90, -1));
 
-        icon_sprite4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 90, -1));
+        icon_ciel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_ciel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 90, -1));
 
-        icon_sprite5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 90, -1));
+        icon_tebs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_tebs, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 90, -1));
 
-        icon_sprite6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 90, -1));
+        icon_burn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_burn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 90, -1));
 
-        icon_sprite7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 90, -1));
+        icon_fanta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_fanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 90, -1));
 
-        icon_sprite8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 90, -1));
+        icon_friesca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
+        getContentPane().add(icon_friesca, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 90, -1));
 
-        icon_sprite9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sprite-logo-vector.png"))); // NOI18N
-        getContentPane().add(icon_sprite9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 90, -1));
-
-        setSize(new java.awt.Dimension(690, 598));
+        setSize(new java.awt.Dimension(599, 598));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_insertmoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertmoneyActionPerformed
         // masukkin uang
-        
+        //inisialisasi variabel
         int money = 0;
-        
-        
-        money = money + Integer.parseInt(txt_money.getText()) + Integer.parseInt(lbl_money.getText());
-        
-        lbl_money.setText(Integer.toString(money));
+        boolean moneyValid = false;
+
+        //panggil method moneyValid untuk mengecek keaslian uang secara sederhana
+        moneyValid = moneyValidator();
+        // jika hasil pengecheckan mengatakan uang asli maka uang dapat diterima
+        if (true == moneyValid) {
+            //apabila uang  dapat diterima maka uang masuk
+            seconds = 0;
+            minutes = 1;
+            hours = 0;
+            money = money + Integer.parseInt(txt_money.getText()) + Integer.parseInt(lbl_money.getText());
+            lbl_money.setText(Integer.toString(money));
+            initMulai();
+            stop();
+            start();
+            //apabila uang tidak diterima unag keluar kembali
+        } else {
+            JOptionPane.showMessageDialog(this, "Uang tidak dapat diterima.");
+        }
+
+        //kembali ke kondisi awal yaitu kosong
+        txt_money.setText(null);
+        rbtn_biru.setSelected(false);
+        rbtn_hijau.setSelected(false);
+        rbtn_coklat.setSelected(false);
+        rbtn_ungu.setSelected(false);
+
     }//GEN-LAST:event_btn_insertmoneyActionPerformed
 
     private void btn_spriteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_spriteActionPerformed
         // Jika ditekan tombol sprite
         int money = 0;
-        
+
         money = Integer.parseInt(lbl_money.getText()) - 5000;
-        
+
         lbl_money.setText(Integer.toString(money));
     }//GEN-LAST:event_btn_spriteActionPerformed
+
+    private void rbtn_coklatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn_coklatActionPerformed
+        // cant choose double colour of money
+
+        if (rbtn_coklat.isSelected()) {
+            rbtn_biru.setSelected(false);
+            rbtn_hijau.setSelected(false);
+            rbtn_ungu.setSelected(false);
+        }
+    }//GEN-LAST:event_rbtn_coklatActionPerformed
+
+    private void rbtn_hijauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn_hijauActionPerformed
+        // cant choose double colour of money
+
+        if (rbtn_hijau.isSelected()) {
+            rbtn_biru.setSelected(false);
+            rbtn_coklat.setSelected(false);
+            rbtn_ungu.setSelected(false);
+        }
+    }//GEN-LAST:event_rbtn_hijauActionPerformed
+
+    private void rbtn_biruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn_biruActionPerformed
+        // cant choose double colour of money
+
+        if (rbtn_biru.isSelected()) {
+            rbtn_coklat.setSelected(false);
+            rbtn_hijau.setSelected(false);
+            rbtn_ungu.setSelected(false);
+        }
+    }//GEN-LAST:event_rbtn_biruActionPerformed
+
+    private void rbtn_unguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn_unguActionPerformed
+        // cant choose double colour of money
+
+        if (rbtn_ungu.isSelected()) {
+            rbtn_biru.setSelected(false);
+            rbtn_hijau.setSelected(false);
+            rbtn_coklat.setSelected(false);
+        }
+    }//GEN-LAST:event_rbtn_unguActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,31 +473,46 @@ public class VM extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_aquarius;
+    private javax.swing.JButton btn_aw;
+    private javax.swing.JButton btn_burn;
+    private javax.swing.JButton btn_ciel;
     private javax.swing.JButton btn_coca;
     private javax.swing.JButton btn_fanta;
+    private javax.swing.JButton btn_friesca;
     private java.awt.Button btn_insertmoney;
     private javax.swing.JButton btn_minute;
     private javax.swing.JButton btn_sprite;
     private javax.swing.JButton btn_tebs;
+    private javax.swing.JLabel icon_aquarius;
+    private javax.swing.JLabel icon_aw;
+    private javax.swing.JLabel icon_burn;
+    private javax.swing.JLabel icon_ciel;
+    private javax.swing.JLabel icon_coca;
+    private javax.swing.JLabel icon_fanta;
+    private javax.swing.JLabel icon_friesca;
+    private javax.swing.JLabel icon_minute;
     private javax.swing.JLabel icon_sprite;
-    private javax.swing.JLabel icon_sprite1;
-    private javax.swing.JLabel icon_sprite2;
-    private javax.swing.JLabel icon_sprite3;
-    private javax.swing.JLabel icon_sprite4;
-    private javax.swing.JLabel icon_sprite5;
-    private javax.swing.JLabel icon_sprite6;
-    private javax.swing.JLabel icon_sprite7;
-    private javax.swing.JLabel icon_sprite8;
-    private javax.swing.JLabel icon_sprite9;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JLabel icon_tebs;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private java.awt.Label label1;
     private java.awt.Label lbl_money;
+    private javax.swing.JLabel lblharga_aquarius;
+    private javax.swing.JLabel lblharga_aw;
+    private javax.swing.JLabel lblharga_burn;
+    private javax.swing.JLabel lblharga_ciel;
+    private javax.swing.JLabel lblharga_coca;
+    private javax.swing.JLabel lblharga_fanta;
+    private javax.swing.JLabel lblharga_friesca;
+    private javax.swing.JLabel lblharga_minute;
+    private javax.swing.JLabel lblharga_sprite;
+    private javax.swing.JLabel lblharga_tebs;
+    private javax.swing.JRadioButton rbtn_biru;
+    private javax.swing.JRadioButton rbtn_coklat;
+    private javax.swing.JRadioButton rbtn_hijau;
+    private javax.swing.JRadioButton rbtn_ungu;
+    private javax.swing.JTextField txtRemaining;
     private java.awt.TextField txt_money;
     // End of variables declaration//GEN-END:variables
 }
